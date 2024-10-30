@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibration Control</title>
+    <style> 
+        body { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: Arial, sans-serif; 
+        } 
+        button { 
+            padding: 15px 30px; 
+            font-size: 18px; 
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="vibrateBtn">Vibrate</button>
+    <script>
+        let isVibrating = false;
+        const button = document.getElementById('vibrateBtn');
+
+        button.addEventListener('touchstart', (e) => { 
+            e.preventDefault(); // Prevents triggering a mouse event after the
+            if (!isVibrating) {
+                navigator.vibrate([5, 5]); // Pattern: vibrate, pause,5ms on, 5ms off (100Hz)
+                button.textContent = 'Stop Vibration';
+            } else {
+                navigator.vibrate(0); // Stops any current vibration
+                button.textContent = 'Vibrate';
+            }
+            isVibrating = !isVibrating;
+        });
+    </script>
+</body>
+</html>
